@@ -1,11 +1,22 @@
-import{ useState } from 'react';
+
 import { FaEyeSlash,FaEye } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
+import { useState, useContext } from 'react';
+import { AuthContext } from './../../AuthContext/AuthProvider';
 
 const LoginPage = () => {
-    const [password, setPassword] = useState('')
-    const [visible, setVisible] = useState(false)
+    const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
+    const {singIn}=useContext(AuthContext);
+
+    const singinWithGoogle=()=>{
+        singIn()
+        .then(res=>{
+            console.log(res)
+        })
+    }
+    
+
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -53,7 +64,7 @@ const LoginPage = () => {
                     <div className="absolute px-5 bg-white">Or</div>
                 </div>
                 <div className="flex mt-4 gap-x-2">
-                    <button
+                    <button onClick={singinWithGoogle}
                         type="button"
                         className="flex items-center justify-center w-5/12 mx-auto hover:bg-black hover:text-white p-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-violet-600"
                     >
