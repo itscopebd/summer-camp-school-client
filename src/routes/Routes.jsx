@@ -3,6 +3,7 @@ import HomePage from "../pages/Home/HomePage";
 import Main from "../layout/Main";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
+// import TestPage from "../pages/RegisterPage/TestPage";
 
 
 
