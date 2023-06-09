@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../AuthContext/AuthProvider';
 
 const Navbar = () => {
 
-const user="roifq"
-
+const {user}= useContext(AuthContext)
+console.log(user)
 
     const menuItems = <>
 
         <li> <Link>Home</Link> </li>
-        <li><Link>Instructors</Link></li>
+        <li><Link to="/instructors" >Instructors</Link></li>
         <li> <Link>Classes</Link> </li>
-        <li> <Link>Dashboard</Link> </li>
+       { user &&
+         <li> <Link>Dashboard</Link> </li>
+       }
 
 
     </>
@@ -37,11 +40,11 @@ const user="roifq"
                     </div>
                     <div className="navbar-end">
                         {
-                            user ? <> <ul><li> <Link to="/login">Login</Link> </li></ul> </> : <> <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                </div>
-                            </label></>
+                           user && user ? <> <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                           <div className="w-10 rounded-full">
+                               <img src={user?.photoURL } />
+                           </div>
+                       </label></>: <> <ul><li> <Link to="/login">Login</Link> </li></ul> </> 
                         }
 
 

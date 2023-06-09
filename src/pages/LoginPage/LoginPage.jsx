@@ -1,20 +1,40 @@
 
 import { FaEyeSlash,FaEye } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { AuthContext } from './../../AuthContext/AuthProvider';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
-    const {singIn}=useContext(AuthContext);
+    const {singIn,userLogin}=useContext(AuthContext);
 
+const navigate= useNavigate();
+
+// login in with google account 
     const singinWithGoogle=()=>{
         singIn()
         .then(res=>{
-            console.log(res)
+            navigate("/")
         })
     }
+
+    // login email and password 
+
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        userLogin(data.email,data.password)
+        .then(res=>{
+            toast("LogIn Success!!");
+            navigate("/")
+        }).catch(error=>{
+            toast("Email or password don't match!!"); 
+        })
+
+    }
+
     
 
     return (
@@ -23,7 +43,7 @@ const LoginPage = () => {
                 <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
                     Log in
                 </h1>
-                <form className="mt-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
                     <div className="mb-2">
                         <label
                             for="email"
@@ -34,7 +54,7 @@ const LoginPage = () => {
                         <input
                             type="email"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        required/>
+                            {...register("email",{ required:true})}/>
                     </div>
                     <div className="mb-2 relative">
                         <label
@@ -44,10 +64,10 @@ const LoginPage = () => {
                             Password
                         </label>
                         <input
-                            value={password}
-                            type={visible ? "text" : "password"} onChange={(e)=>setPassword(e.target.value)}
+                            
+                            type={visible ? "text" : "password"}
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        required/>
+                            {...register("password",{ required:true})}/>
                         <div onClick={()=>setVisible(!visible)} className='absolute right-2 top-1/2 translate-y-1/2 cursor-pointer' >
                              { visible? <> <FaEye></FaEye> </> : <FaEyeSlash></FaEyeSlash> }
                         

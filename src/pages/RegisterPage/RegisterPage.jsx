@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaEyeSlash,FaEye } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../AuthContext/AuthProvider';
 import { toast } from 'react-toastify';
@@ -11,12 +11,13 @@ const RegisterPage = () => {
     const [cVisible, setCVisible] = useState(false);
 
 
-   const {singIn,createUser}=useContext(AuthContext);
-
+   const {singIn,createUser,userUpdate}=useContext(AuthContext);
+const navigate= useNavigate();
 const singinWithGoogle=()=>{
     singIn()
     .then(res=>{
         toast("LogIn Success!! ")
+        navigate('/')
     })
 }
 
@@ -33,7 +34,15 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
     }else{
         createUser(data.email,password)
         .then(res=>{
-           toast("Registration Success!! ")
+            console.log(res)
+            userUpdate(data.name,data.photoUrl)
+            .then(res=>{
+        
+
+                toast("Registration Success!!");
+                // navigate("/login")
+            })
+          
         }).catch(error=>{
             toast("User Already Exist!! ")
         })
@@ -57,7 +66,7 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
                         <input
                             type="text"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            required {...register("name")}/>
+                            required {...register("name",{ required:true})}/>
                     </div>
                     <div className="mb-2">
                         <label
@@ -127,7 +136,7 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
                         <input
                             type="url"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                             {...register("photourl",{ required: true})} />
+                             {...register("photoUrl",{ required: true})} />
                     </div>
 
                     <div className="mt-6">
