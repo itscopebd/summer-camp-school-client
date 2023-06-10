@@ -5,6 +5,8 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import Instructors from "../pages/Instructors/Instructors";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
+import Dashboard from "../layout/Dashboard";
+import MyCart from "../pages/Dashboard/MyCart";
 // import TestPage from "../pages/RegisterPage/TestPage";
 
 
@@ -33,6 +35,16 @@ export const router = createBrowserRouter([
             {
                 path: "/classes",
                 element: <ClassesPage></ClassesPage>
+            }
+        ]
+    },
+    {
+        path:"dashboard",
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:"mycart",
+                element:<MyCart></MyCart>
             }
         ]
     }

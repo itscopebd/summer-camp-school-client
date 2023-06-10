@@ -13,7 +13,7 @@ console.log(user)
         <li><Link to="/instructors" >Instructors</Link></li>
         <li> <Link to="classes">Classes</Link> </li>
        { user &&
-         <li> <Link>Dashboard</Link> </li>
+         <li> <Link to="/dashboard/mycart">Dashboard</Link> </li>
        }
 
 
