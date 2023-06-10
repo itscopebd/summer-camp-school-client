@@ -11,7 +11,7 @@ console.log(user)
 
         <li> <Link>Home</Link> </li>
         <li><Link to="/instructors" >Instructors</Link></li>
-        <li> <Link>Classes</Link> </li>
+        <li> <Link to="classes">Classes</Link> </li>
        { user &&
          <li> <Link>Dashboard</Link> </li>
        }

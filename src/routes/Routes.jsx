@@ -4,6 +4,7 @@ import Main from "../layout/Main";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import Instructors from "../pages/Instructors/Instructors";
+import ClassesPage from "../pages/ClassesPage/ClassesPage";
 // import TestPage from "../pages/RegisterPage/TestPage";
 
 
@@ -17,17 +18,21 @@ export const router = createBrowserRouter([
                 path: "/",
                 element: <HomePage></HomePage>
             },
-             {
+            {
 
-                path:'/login',
-                element:<LoginPage></LoginPage>
+                path: '/login',
+                element: <LoginPage></LoginPage>
             },
             {
-                path:"/singup",
-                element:<RegisterPage></RegisterPage>
-            },{
-                path:"/instructors",
-                element:<Instructors></Instructors>
+                path: "/singup",
+                element: <RegisterPage></RegisterPage>
+            }, {
+                path: "/instructors",
+                element: <Instructors></Instructors>
+            },
+            {
+                path: "/classes",
+                element: <ClassesPage></ClassesPage>
             }
         ]
     }
