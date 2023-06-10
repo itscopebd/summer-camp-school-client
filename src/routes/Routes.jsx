@@ -7,6 +7,7 @@ import Instructors from "../pages/Instructors/Instructors";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import Dashboard from "../layout/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart";
+import PrivateRoute from "./PrivateRoute";
 // import TestPage from "../pages/RegisterPage/TestPage";
 
 
@@ -40,7 +41,7 @@ export const router = createBrowserRouter([
     },
     {
         path:"dashboard",
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
             {
                 path:"mycart",

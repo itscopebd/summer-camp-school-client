@@ -1,20 +1,37 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
 
-const {user}= useContext(AuthContext)
-console.log(user)
+    const { user, logOut } = useContext(AuthContext)
+    const handleLogOut = () => {
+        logOut()
+            .then(data => {
+                toast.success('Log Out Success!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }).catch(error => {
+                console.log(error)
+            })
+    }
 
     const menuItems = <>
 
         <li> <Link>Home</Link> </li>
         <li><Link to="/instructors" >Instructors</Link></li>
         <li> <Link to="classes">Classes</Link> </li>
-       { user &&
-         <li> <Link to="/dashboard/mycart">Dashboard</Link> </li>
-       }
+        {user &&
+            <li> <Link to="/dashboard/mycart">Dashboard</Link> </li>
+        }
 
 
     </>
@@ -40,13 +57,14 @@ console.log(user)
                     </div>
                     <div className="navbar-end">
                         {
-                           user && user ? <> <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                           <div className="w-10 rounded-full">
-                               <img src={user?.photoURL } />
-                           </div>
-                       </label></>: <> <ul><li> <Link to="/login">Login</Link> </li></ul> </> 
-                        }
+                            user && user ? <> <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img src={user?.photoURL} />
 
+                                </div>
+                            </label> <button onClick={handleLogOut} className='btn btn-sm btn-primary'>Logout</button>
+                            </> : <> <ul><li> <Link to="/login">Login</Link> </li></ul> </>
+                        }
 
 
                     </div>

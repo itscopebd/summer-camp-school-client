@@ -1,6 +1,6 @@
 
 import { FaEyeSlash,FaEye } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { AuthContext } from './../../AuthContext/AuthProvider';
 import { useForm } from 'react-hook-form';
@@ -12,12 +12,23 @@ const LoginPage = () => {
     const {singIn,userLogin}=useContext(AuthContext);
 
 const navigate= useNavigate();
-
+const location = useLocation()
+const redirectFrom= location.state?.from?.pathname || "/";
 // login in with google account 
     const singinWithGoogle=()=>{
         singIn()
         .then(res=>{
-            navigate("/")
+            toast.success('LogIn Success!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            navigate(redirectFrom)
         })
     }
 
@@ -27,7 +38,16 @@ const navigate= useNavigate();
     const onSubmit = data => {
         userLogin(data.email,data.password)
         .then(res=>{
-            toast("LogIn Success!!");
+            toast.success('LogIn Success!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             navigate("/")
         }).catch(error=>{
             toast("Email or password don't match!!"); 
@@ -36,7 +56,7 @@ const navigate= useNavigate();
     }
 
     
-
+console.log(location)
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
