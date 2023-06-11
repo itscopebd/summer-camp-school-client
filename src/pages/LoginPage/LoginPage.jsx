@@ -62,11 +62,7 @@ const LoginPage = () => {
                     theme: "light",
                 });
 
-
-                console.log(data)
-
-
-                navigate(redirectFrom,{ replace:true });
+              navigate(redirectFrom,{ replace:true });
 
             }).catch(error => {
                 toast("Email or password don't match!!");
