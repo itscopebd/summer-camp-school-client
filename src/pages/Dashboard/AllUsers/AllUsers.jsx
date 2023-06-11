@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 const AllUsers = () => {
     const { data: users = [], refetch } = useQuery(['users'], async () => {
         const res = await fetch("http://localhost:5000/users")
@@ -9,7 +10,34 @@ const AllUsers = () => {
 
 
     const handleDeleteUser = (id) => {
+
+    }
+
+
+    const handleAdmin = (id) => {
+        fetch(`http://localhost:5000/users/admin/${id}`, {
+            method: "PATCH"
+        })
+        .then(data => {
+            refetch()
+                toast.success("Admin Create Success !")
+            }).catch(error=>{
+                console.log(error)
+            })
+    }
+
+
+    const handleInstructor = (id) => {
         console.log(id)
+        fetch(`http://localhost:5000/users/instructor/${id}`, {
+            method: "PATCH"
+        })
+        .then(data => {
+            refetch()
+                toast.success("Instructor Create Success !")
+            }).catch(error=>{
+                console.log(error)
+            })
     }
 
     return (
@@ -35,8 +63,18 @@ const AllUsers = () => {
                                 <td>{index + 1}</td>
                                 <td>{user.userName}</td>
                                 <td>{user.userEmail}</td>
-                                <td>Admin</td>
-                                <td> <button onClick={() => handleDeleteUser(user._id)}> <FaTrash></FaTrash> </button> </td>
+                                <td> {
+                                    user.role === 'admin' ? <> <button className='btn btn-primary btn-sm capitalize' disabled>Admin</button> </> :
+                                        <><button onClick={() => handleAdmin(user._id)} className='btn btn-primary btn-sm capitalize'>Make Admin</button></>
+                                }
+
+                                    {
+                                        user.role === 'instructor' ? <> <button disabled className='btn btn-primary btn-sm capitalize ml-5'>Instructor</button> </> :
+                                            <><button onClick={()=>handleInstructor(user._id)} className='btn btn-primary btn-sm capitalize ml-5'>Make Instructor</button></>
+                                    }
+                                </td>
+
+                                <td> <button onClick={() => handleDeleteUser(user._id)} className='btn btn-primary btn-sm'> <FaTrash></FaTrash> </button> </td>
                             </tr>
                             )
 
