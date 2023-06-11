@@ -8,11 +8,21 @@ const AllUsers = () => {
         return res.json()
     })
 
+// delete user 
 
     const handleDeleteUser = (id) => {
-
+        fetch(`http://localhost:5000/users/delete/${id}`, {
+            method: "DELETE"
+        })
+        .then(data => {
+            refetch()
+                toast.success("Delete Success !")
+            }).catch(error=>{
+                console.log(error)
+            })
     }
 
+// make admin 
 
     const handleAdmin = (id) => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
@@ -26,6 +36,7 @@ const AllUsers = () => {
             })
     }
 
+// make instructor 
 
     const handleInstructor = (id) => {
         console.log(id)
