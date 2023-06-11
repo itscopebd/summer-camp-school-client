@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { FaBookOpen, FaCalendarAlt, FaHome, FaShoppingCart, FaUsers, FaWallet } from "react-icons/fa";
+import { FaBook, FaBookOpen, FaCalendarAlt, FaHome, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 const Dashboard = () => {
+    const isAdmin = true;
     return (
         <div className="container mx-auto">
             <div className="drawer lg:drawer-open">
@@ -16,16 +17,25 @@ const Dashboard = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-                        {/* Sidebar content here */}
-                        <li> <Link to="/dashboard/mycart"> <FaHome/> User Home </Link> </li>
-                        <li> <Link to="/dashboard/mycart"> <FaCalendarAlt/> Reservations </Link> </li>
-                        <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> Payment History </Link> </li>
-                        <li> <Link to="/dashboard/mycart"> <FaShoppingCart></FaShoppingCart> My Cart </Link> </li>
-                        <div className="divider"></div>
-                        <li> <Link to="/"> <FaHome/> Home </Link> </li>
-                        <li> <Link to="/classes"> <FaBookOpen></FaBookOpen> Classes </Link> </li>
-                        <li> <Link to="/instructors"> <FaUsers></FaUsers> Instructors </Link> </li>
-
+                        {
+                            isAdmin ? <> <li> <Link to="/dashboard/mycart"> <FaHome /> Admin Home </Link> </li>
+                                <li> <Link to="/dashboard/mycart"> <FaUtensils/> Add Items </Link> </li>
+                                <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> Manage Items </Link> </li>
+                                <li> <Link to="/dashboard/mycart"> <FaBook/> Manage Bookings </Link> </li>
+                                <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> All Users </Link> </li>
+    
+                            </> : 
+                            <> <li> <Link to="/dashboard/mycart"> <FaHome /> User Home </Link> </li>
+                                <li> <Link to="/dashboard/mycart"> <FaCalendarAlt /> Reservations </Link> </li>
+                                <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> Payment History </Link> </li>
+                                <li> <Link to="/dashboard/mycart"> <FaShoppingCart></FaShoppingCart> My Cart </Link> </li>
+                               
+                            </>
+                        }
+ <div className="divider"></div>
+                                <li> <Link to="/"> <FaHome /> Home </Link> </li>
+                                <li> <Link to="/classes"> <FaBookOpen></FaBookOpen> Classes </Link> </li>
+                                <li> <Link to="/instructors"> <FaUsers></FaUsers> Instructors </Link> </li>
                     </ul>
 
                 </div>

@@ -1,53 +1,70 @@
 import React, { useContext, useState } from 'react';
-import { FaEyeSlash,FaEye } from 'react-icons/fa';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../AuthContext/AuthProvider';
 import { toast } from 'react-toastify';
 const RegisterPage = () => {
-   
+
     const [visible, setVisible] = useState(false);
     const [cPassword, setCPassword] = useState('');
     const [cVisible, setCVisible] = useState(false);
 
 
-   const {singIn,createUser,userUpdate}=useContext(AuthContext);
-const navigate= useNavigate();
-const singinWithGoogle=()=>{
-    singIn()
-    .then(res=>{
-        toast("LogIn Success!! ")
-        navigate('/')
-    })
-}
-
-
-const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => {
-    const password= data.password;
-    const cPassword=data.cpassword;
-    console.log(password)
-    console.log(cPassword)
-    if(password !== cPassword){
-        setCPassword("Password Don't Match!!"); 
-       
-    }else{
-        createUser(data.email,password)
-        .then(res=>{
-            console.log(res)
-            userUpdate(data.name,data.photoUrl)
-            .then(res=>{
-        
-
-                toast("Registration Success!!");
-                // navigate("/login")
+    const { singIn, createUser, userUpdate } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const singinWithGoogle = () => {
+        singIn()
+            .then(res => {
+                toast("LogIn Success!! ")
+                navigate('/')
             })
-          
-        }).catch(error=>{
-            toast("User Already Exist!! ")
-        })
     }
-  };
+
+
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        const password = data.password;
+        const cPassword = data.cpassword;
+        console.log(password)
+        console.log(cPassword)
+        if (password !== cPassword) {
+            setCPassword("Password Don't Match!!");
+
+        } else {
+            createUser(data.email, password)
+                .then(res => {
+
+
+                    const savedUser = { userName: data.name, userEmail: data.email }
+                    fetch("http://localhost:5000/users", {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(savedUser)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            toast("Registration Success!!");
+                            navigate("/login")
+                        })
+
+
+
+                    
+                    userUpdate(data.name, data.photoUrl)
+                      
+                        .then(data => {
+
+                        
+                        })
+
+                }).catch(error => {
+                    toast("User Already Exist!! ")
+                })
+        }
+    };
 
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
@@ -66,7 +83,7 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
                         <input
                             type="text"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            required {...register("name",{ required:true})}/>
+                            required {...register("name", { required: true })} />
                     </div>
                     <div className="mb-2">
                         <label
@@ -78,7 +95,7 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
                         <input
                             type="email"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            required {...register("email")}/>
+                            required {...register("email")} />
                     </div>
                     <div className="mb-2 relative">
                         <label
@@ -88,16 +105,16 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
                             Password
                         </label>
                         <input
-                            
+
                             type={visible ? "text" : "password"}
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             {...register("password", {
                                 required: true,
                                 pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])/
 
-                            })}/>
-                            {errors.password?.type === "required" && <p className='text-red-500 mt-2'>Password field is required</p>}
-                                {errors.password?.type === "pattern" && <p className='text-red-500 mt-2'>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</p>}
+                            })} />
+                        {errors.password?.type === "required" && <p className='text-red-500 mt-2'>Password field is required</p>}
+                        {errors.password?.type === "pattern" && <p className='text-red-500 mt-2'>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</p>}
 
                         <div onClick={() => setVisible(!visible)} className='absolute right-2 top-1/2 translate-y-1/2 cursor-pointer' >
                             {visible ? <> <FaEye></FaEye> </> : <FaEyeSlash></FaEyeSlash>}
@@ -109,17 +126,18 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
                             for="cpassword"
                             className="block text-sm font-semibold text-gray-800"
                         >
-                           Confirm Password
+                            Confirm Password
                         </label>
                         <input
-                            
-                            type={cVisible ? "text" : "password"} 
+
+                            type={cVisible ? "text" : "password"}
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             {...register("cpassword", {
-                                required: true})}/>
+                                required: true
+                            })} />
 
-                            {errors.cpassword?.type === "required" && <p className='text-red-500 mt-2'>Password field is required</p>}
-                               { <p className='text-red-500 mt-2'>{cPassword}</p> }
+                        {errors.cpassword?.type === "required" && <p className='text-red-500 mt-2'>Password field is required</p>}
+                        {<p className='text-red-500 mt-2'>{cPassword}</p>}
                         <div onClick={() => setCVisible(!cVisible)} className='absolute right-2 top-1/2 translate-y-1/2 cursor-pointer' >
                             {cVisible ? <> <FaEye></FaEye> </> : <FaEyeSlash></FaEyeSlash>}
 
@@ -136,7 +154,7 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
                         <input
                             type="url"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                             {...register("photoUrl",{ required: true})} />
+                            {...register("photoUrl", { required: true })} />
                     </div>
 
                     <div className="mt-6">

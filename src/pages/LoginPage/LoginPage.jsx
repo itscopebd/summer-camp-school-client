@@ -1,5 +1,5 @@
 
-import { FaEyeSlash,FaEye } from 'react-icons/fa';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { AuthContext } from './../../AuthContext/AuthProvider';
@@ -7,56 +7,73 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {
-    const [password, setPassword] = useState('');
+    // const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
-    const {singIn,userLogin}=useContext(AuthContext);
+    const { singIn, userLogin } = useContext(AuthContext);
 
-const navigate= useNavigate();
-const location = useLocation()
-const redirectFrom= location.state?.from?.pathname || "/";
-// login in with google account 
-    const singinWithGoogle=()=>{
+    const navigate = useNavigate();
+    const location = useLocation()
+    const redirectFrom = location.state?.from?.pathname || "/";
+    // login in with google account 
+    const singinWithGoogle = () => {
         singIn()
-        .then(res=>{
-            toast.success('LogIn Success!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-            navigate(redirectFrom)
-        })
+            .then(data => {
+                toast.success('LogIn Success!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+
+                const savedUser = { userName: data.user.displayName, userEmail: data.user.email }
+                fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(savedUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                       
+                    })
+                    navigate(redirectFrom, { replace: true })
+            })
     }
 
     // login email and password 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        userLogin(data.email,data.password)
-        .then(res=>{
-            toast.success('LogIn Success!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-            navigate("/")
-        }).catch(error=>{
-            toast("Email or password don't match!!"); 
-        })
+        userLogin(data.email, data.password)
+            .then(data => {
+                toast.success('LogIn Success!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+
+
+                console.log(data)
+
+
+                navigate(redirectFrom,{ replace:true });
+
+            }).catch(error => {
+                toast("Email or password don't match!!");
+            })
 
     }
 
-    
-console.log(location)
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -74,7 +91,7 @@ console.log(location)
                         <input
                             type="email"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register("email",{ required:true})}/>
+                            {...register("email", { required: true })} />
                     </div>
                     <div className="mb-2 relative">
                         <label
@@ -84,14 +101,14 @@ console.log(location)
                             Password
                         </label>
                         <input
-                            
+
                             type={visible ? "text" : "password"}
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register("password",{ required:true})}/>
-                        <div onClick={()=>setVisible(!visible)} className='absolute right-2 top-1/2 translate-y-1/2 cursor-pointer' >
-                             { visible? <> <FaEye></FaEye> </> : <FaEyeSlash></FaEyeSlash> }
-                        
-                         </div>
+                            {...register("password", { required: true })} />
+                        <div onClick={() => setVisible(!visible)} className='absolute right-2 top-1/2 translate-y-1/2 cursor-pointer' >
+                            {visible ? <> <FaEye></FaEye> </> : <FaEyeSlash></FaEyeSlash>}
+
+                        </div>
                     </div>
 
                     <div className="mt-6">
@@ -116,7 +133,7 @@ console.log(location)
                             <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
                         </svg>
                     </button>
-                
+
                 </div>
 
                 <p className="mt-8 text-xs font-light text-center text-gray-700">
