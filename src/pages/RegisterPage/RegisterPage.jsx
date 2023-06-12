@@ -35,7 +35,6 @@ const RegisterPage = () => {
             createUser(data.email, password)
                 .then(res => {
 
-
                     const savedUser = { userName: data.name, userEmail: data.email }
                     fetch("http://localhost:5000/users", {
                         method: "POST",
@@ -49,15 +48,8 @@ const RegisterPage = () => {
                             toast("Registration Success!!");
                             navigate("/login")
                         })
-
-
-
-                    
-                    userUpdate(data.name, data.photoUrl)
-                      
+                    userUpdate(data.name, data.photoUrl) 
                         .then(data => {
-
-                        
                         })
 
                 }).catch(error => {
@@ -72,6 +64,7 @@ const RegisterPage = () => {
                 <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
                     Sing Up
                 </h1>
+
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
                     <div className="mb-2">
                         <label
@@ -163,6 +156,8 @@ const RegisterPage = () => {
                         </button>
                     </div>
                 </form>
+
+                
                 <div className="relative flex items-center justify-center w-full mt-6 border border-t">
                     <div className="absolute px-5 bg-white">Or</div>
                 </div>
