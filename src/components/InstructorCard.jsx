@@ -1,17 +1,16 @@
 import React from 'react';
 
 const InstructorCard = ({ instructor }) => {
-    const { userName,userEmail } = instructor;
+    const { userName,userEmail,useImage } = instructor;
 
-    console.log(instructor)
     return (
         <>
 
             <div className="card bg-base-100 shadow-xl">
-                <figure><img src={instructor_image} alt="Shoes" /></figure>
+                <figure><img className='w-full h-96' src={useImage} alt="Shoes" /></figure>
                 <div className="card-body">
-                    <h2 className="card-title">{name}</h2>
-                    <p>{email}</p>
+                    <h2 className="card-title">{userName}</h2>
+                    <p>{userEmail}</p>
                 </div>
             </div>
 

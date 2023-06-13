@@ -27,7 +27,7 @@ const Navbar = () => {
 
     const menuItems = <>
 
-        <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"}>Home</NavLink> </li>
+        <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/">Home</NavLink> </li>
         <li><NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/instructors" >Instructors</NavLink></li>
         <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="classes">Classes</NavLink> </li>
         {user &&
