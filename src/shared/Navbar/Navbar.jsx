@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext)
+    console.log("console " + user)
     const handleLogOut = () => {
         logOut()
             .then(data => {
@@ -26,17 +27,17 @@ const Navbar = () => {
 
     const menuItems = <>
 
-        <li> <Link>Home</Link> </li>
-        <li><Link to="/instructors" >Instructors</Link></li>
-        <li> <Link to="classes">Classes</Link> </li>
+        <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"}>Home</NavLink> </li>
+        <li><NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/instructors" >Instructors</NavLink></li>
+        <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="classes">Classes</NavLink> </li>
         {user &&
-            <li> <Link to="/dashboard/mycart">Dashboard</Link> </li>
+            <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard/mycart">Dashboard</NavLink> </li>
         }
 
 
     </>
     return (
-        <div className='bg-gray-300 border-b-2 '>
+        <div className='bg-[#5ab337d6] border-b-2 '>
             <div className='container mx-auto'>
                 <div className="navbar">
                     <div className="navbar-start">
@@ -48,7 +49,8 @@ const Navbar = () => {
                                 {menuItems}
                             </ul>
                         </div>
-                        <a className="btn btn-ghost normal-case text-xl">MusicLearner</a>
+                        <Link to="/" className="btn hover:bg-transparent btn-ghost normal-case text-xl">
+                            <img src="https://i.ibb.co/f2hwxcv/logo.png" alt="" /> </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
@@ -62,8 +64,8 @@ const Navbar = () => {
                                     <img src={user?.photoURL} />
 
                                 </div>
-                            </label> <button onClick={handleLogOut} className='btn btn-sm btn-primary'>Logout</button>
-                            </> : <> <ul><li> <Link to="/login">Login</Link> </li></ul> </>
+                            </label> <button onClick={handleLogOut} className='btn btn-sm leading-6 hover:text-black bg-[#255214d6] capitalize text-lg font-semibold text-white'>Logout</button>
+                            </> : <> <ul><li> <Link className='btn btn-sm leading-6 hover:text-black bg-[#255214d6] capitalize text-lg font-semibold text-white' to="/login">Login</Link> </li></ul> </>
                         }
 
 

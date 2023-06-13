@@ -1,9 +1,9 @@
 import React from 'react';
 
-const InstructorCard = ({instructor}) => {
-    const {instructor_image,name,email}=instructor;
+const InstructorCard = ({ instructor }) => {
+    const { userName,userEmail } = instructor;
 
-
+    console.log(instructor)
     return (
         <>
 

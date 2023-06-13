@@ -25,7 +25,7 @@ const AddClass = () => {
             .then(imgResponse => {
                 // const imgUrl= imgResponse.
                 const imgUrl=imgResponse.data.display_url;
-                console.log(data)
+                
                 const {className,userEmail,userName,price,availableSeats}=data;
                 const newItems={className,userEmail,userName,availableSeats,price:parseFloat(price),classImage:imgUrl,status:"Pending"}
                 fetch("http://localhost:5000/cource",{

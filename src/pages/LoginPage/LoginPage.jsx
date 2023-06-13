@@ -9,8 +9,8 @@ import { toast } from 'react-toastify';
 const LoginPage = () => {
     // const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
-    const { singIn, userLogin } = useContext(AuthContext);
-
+    const { singIn, userLogin,user } = useContext(AuthContext);
+console.log(user)
     const navigate = useNavigate();
     const location = useLocation()
     const redirectFrom = location.state?.from?.pathname || "/";

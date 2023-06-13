@@ -4,6 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../AuthContext/AuthProvider';
 import { toast } from 'react-toastify';
+// new 
+const imageHostToken = import.meta.env.VITE_Image_host_Token;
+// new 
 const RegisterPage = () => {
 
     const [visible, setVisible] = useState(false);
@@ -23,38 +26,67 @@ const RegisterPage = () => {
 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    // new 
+    const hostUrl = `https://api.imgbb.com/1/upload?key=${imageHostToken}`;
+    // new 
     const onSubmit = data => {
         const password = data.password;
         const cPassword = data.cpassword;
-        console.log(password)
-        console.log(cPassword)
         if (password !== cPassword) {
             setCPassword("Password Don't Match!!");
 
         } else {
-            createUser(data.email, password)
-                .then(res => {
 
-                    const savedUser = { userName: data.name, userEmail: data.email }
-                    fetch("http://localhost:5000/users", {
-                        method: "POST",
-                        headers: {
-                            "content-type": "application/json"
-                        },
-                        body: JSON.stringify(savedUser)
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            toast("Registration Success!!");
-                            navigate("/login")
-                        })
-                    userUpdate(data.name, data.photoUrl) 
+            // new 
+
+            const formData = new FormData();
+            formData.append('image', data.image[0])
+
+            console.log(formData)
+
+            fetch(hostUrl, {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(imgResponse => {
+                    // const imgUrl= imgResponse.
+                    const imgUrl = imgResponse.data.display_url;
+                    console.log(imgUrl)
+                    // new 
+
+
+                    createUser(data.email, password)
+                        .then(res => {
+
+
+
+
+                            const savedUser = { useImage:imgUrl,userName: data.name, userEmail: data.email }
+                            fetch("http://localhost:5000/users", {
+                                method: "POST",
+                                headers: {
+                                    "content-type": "application/json"
+                                },
+                                body: JSON.stringify(savedUser)
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    toast("Registration Success!!");
+                                    navigate("/login")
+                                })
+                      
+                    userUpdate(data.name, imgUrl)
                         .then(data => {
                         })
 
                 }).catch(error => {
                     toast("User Already Exist!! ")
                 })
+                      // new 
+                    })
+
+                    // new 
         }
     };
 
@@ -145,9 +177,9 @@ const RegisterPage = () => {
                             Photo Url
                         </label>
                         <input
-                            type="url"
+                            type="file"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register("photoUrl", { required: true })} />
+                            {...register("image", { required: true })} />
                     </div>
 
                     <div className="mt-6">
@@ -157,7 +189,7 @@ const RegisterPage = () => {
                     </div>
                 </form>
 
-                
+
                 <div className="relative flex items-center justify-center w-full mt-6 border border-t">
                     <div className="absolute px-5 bg-white">Or</div>
                 </div>
