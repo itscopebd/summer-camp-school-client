@@ -37,7 +37,7 @@ const Navbar = () => {
 
     </>
     return (
-        <div className='bg-[#5ab337d6] border-b-2 '>
+        <div className='bg-[#5ab337d6]'>
             <div className='container mx-auto'>
                 <div className="navbar">
                     <div className="navbar-start">
