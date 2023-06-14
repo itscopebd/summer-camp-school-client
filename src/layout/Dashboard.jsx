@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { FaBook, FaBookOpen, FaCalendarAlt, FaHome, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
+import UseAdmin from '../hooks/UseAdmin';
+import UseInstructor from '../hooks/useInstructor';
 const Dashboard = () => {
-    const isAdmin = true;
-    const isIstructor = false;
+    // const isAdmin = true;
+    const [isAdmin] = UseAdmin();
+    const [isInstructor] = UseInstructor();
+    console.log(isInstructor)
     return (
         <div className="container mx-auto">
             <div className="drawer lg:drawer-open">
@@ -19,14 +23,14 @@ const Dashboard = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                         {
-                            isAdmin ? <> <li> <Link to="/dashboard/mycart"> <FaHome /> Admin Home </Link> </li>
+                            isAdmin?.admin ? <> <li> <Link to="/dashboard/mycart"> <FaHome /> Admin Home </Link> </li>
                                 <li> <Link to="/dashboard/mycart"> <FaUtensils /> Add Items </Link> </li>
                                 <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> Manage Items </Link> </li>
                                 <li> <Link to="/dashboard/manageclass"> <FaWallet></FaWallet> Manage Class </Link> </li>
                                 <li> <Link to="/dashboard/mycart"> <FaBook /> Manage Bookings </Link> </li>
                                 <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> All Users </Link> </li>
 
-                            </> : isIstructor ?
+                            </> : isInstructor?.instructor ?
                                 <> <li> <Link to="/dashboard/mycart"> <FaHome /> Instructors Home </Link> </li>
                                     <li> <Link to="/dashboard/addclass"> <FaUtensils /> Add a Class </Link> </li>
                                     <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> My Classes </Link> </li>
