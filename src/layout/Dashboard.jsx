@@ -3,11 +3,13 @@ import { Link, Outlet } from 'react-router-dom';
 import { FaBook, FaBookOpen, FaCalendarAlt, FaHome, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import UseAdmin from '../hooks/UseAdmin';
 import UseInstructor from '../hooks/useInstructor';
+
 const Dashboard = () => {
-    // const isAdmin = true;
+    
+
     const [isAdmin] = UseAdmin();
     const [isInstructor] = UseInstructor();
-    console.log(isInstructor)
+//   console.log(isInstructorLoading)
     return (
         <div className="container mx-auto">
             <div className="drawer lg:drawer-open">
@@ -31,11 +33,11 @@ const Dashboard = () => {
                                 <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> All Users </Link> </li>
 
                             </> : isInstructor?.instructor ?
-                                <> <li> <Link to="/dashboard/mycart"> <FaHome /> Instructors Home </Link> </li>
+                                <> <li> <Link to="/dashboard/istructor"> <FaHome /> Instructors Home </Link> </li>
                                     <li> <Link to="/dashboard/addclass"> <FaUtensils /> Add a Class </Link> </li>
-                                    <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> My Classes </Link> </li>
-                                    <li> <Link to="/dashboard/mycart"> <FaBook /> Total Enrolled Students </Link> </li>
-                                    <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> Feedback </Link> </li>
+                                    <li> <Link to="/dashboard/myclasses"> <FaWallet></FaWallet> My Classes </Link> </li>
+                                    {/* <li> <Link to="/dashboard/mycart"> <FaBook /> Total Enrolled Students </Link> </li>
+                                    <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> Feedback </Link> </li> */}
 
                                 </> : <> <li> <Link to="/dashboard/mycart"> <FaHome /> User Home </Link> </li>
                                     <li> <Link to="/dashboard/mycart"> <FaCalendarAlt /> Reservations </Link> </li>

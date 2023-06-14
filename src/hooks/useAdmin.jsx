@@ -13,9 +13,6 @@ const UseAdmin = () => {
         })
         return res.json()
     })
-
-    console.log(isAdmin)
-
     return [isAdmin, isAdminLoading]
 }
 export default UseAdmin;

@@ -3,7 +3,6 @@ import HomePage from "../pages/Home/HomePage";
 import Main from "../layout/Main";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
-import Instructors from "../pages/Instructors/Instructors";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import Dashboard from "../layout/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart";
@@ -11,6 +10,8 @@ import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AddClass from "../pages/Dashboard/Instructors/AddClass";
 import ManageClass from "../pages/Dashboard/Admin/ManageClass";
+import MyClasses from "../pages/Dashboard/Instructors/MyClasses";
+import Instructors from "../pages/Dashboard/Instructors/Instructors";
 
 
 
@@ -46,23 +47,26 @@ export const router = createBrowserRouter([
         path: "dashboard",
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
-            {
-                path: "mycart",
-                element: <MyCart></MyCart>
-            }
-            ,
+            
             {
                 path: "allusers",
                 element: <AllUsers></AllUsers>
             },
             {
-                path:"addclass",
-                element:<AddClass></AddClass>
+                path: "manageclass",
+                element: <ManageClass></ManageClass>
+            },
+            
+            {
+                path: "addclass",
+                element: <AddClass></AddClass>
             },
             {
-                path:"manageclass",
-                element:<ManageClass></ManageClass>
+                path: "myclasses",
+                element: <MyClasses></MyClasses>
             }
+
+
         ]
     }
 ])

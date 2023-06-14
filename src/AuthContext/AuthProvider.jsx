@@ -22,10 +22,12 @@ const AuthProvider = ({ children }) => {
 
     // create user 
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const userLogin = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
@@ -43,16 +45,23 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
 
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user)
+            
 
             if (user) {
                 axios.post("http://localhost:5000/jwt", { email: user.email })
                     .then(data => {
                         localStorage.setItem("access-token", data.data.access_token);
+                        setUser(user)
+                        setLoading(false)
                     })
             }
-            localStorage.removeItem('access-token')
-            setLoading(false)
+            else{
+                localStorage.removeItem('access-token')
+                setUser(user)
+                setLoading(false)
+            }
+            
+           
         })
         return () => {
             unsubscribe()
@@ -66,7 +75,8 @@ const AuthProvider = ({ children }) => {
         createUser,
         userLogin,
         userUpdate,
-        logOut
+        logOut,
+        loading
     }
 
     return (
