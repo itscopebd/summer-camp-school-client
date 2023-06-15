@@ -5,19 +5,17 @@ import { toast } from 'react-toastify';
 
 const ClassesCard = ({ classe, checkUsers }) => {
 
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    console.log(classe)
 
-
-
-    const { _id, classImage, name, className, availableSeats, price, userName } = classe;
-
+    const { _id, classImage, className, availableSeats, price, userName } = classe;
 
     const location = useLocation();
     const navigate = useNavigate()
     const [isSelected, setIsSelected] = useState(false)
 
     const handleAddToCart = () => {
-        const selectedClass = { id: _id, name: name, price: price, isSelected: true }
+        const selectedClass = { id: _id,classImage:classImage, instructor:userName,userEmail:user?.email, price: price, isSelected: true }
         if (user) {
             fetch("http://localhost:5000/carts", {
                 method: "POST",
@@ -47,23 +45,11 @@ const ClassesCard = ({ classe, checkUsers }) => {
         }
     }
 
-
-
-    // useEffect(() => {
-    //     fetch("http://localhost:5000/carts")
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             // setIsSelected(data.isSelected)
-    //         })
-    // }, [])
-
-
     return (
         <>
 
             <div className="card bg-base-100 shadow-xl">
-                <figure><img src={classImage} alt="Shoes" /></figure>
+                <figure><img className='w-full h-92' src={classImage} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{className}</h2>
                     <h4 className='font-bold'>Instructor: {userName}</h4>
@@ -73,10 +59,10 @@ const ClassesCard = ({ classe, checkUsers }) => {
                     </div>
                     {
 
-                        checkUsers.role === "admin" || checkUsers.role === "instructor" ? < button disabled className='btn btn-sm btn-primary text-white'>Select Class</button> :
-                            <button onClick={handleAddToCart} className='btn btn-sm btn-primary text-white'>Select Class</button>
+                        user && user ? (checkUsers?.role === "admin" || checkUsers?.role === "instructor" ? < button disabled className='btn btn-sm btn-primary text-white'>Select Class</button> : <button onClick={handleAddToCart} className='btn btn-sm btn-primary text-white'>Select Class</button>)
+                            : (<button onClick={handleAddToCart} className='btn btn-sm btn-primary text-white'>Select Class</button>
 
-
+                            )
 
                     }
 

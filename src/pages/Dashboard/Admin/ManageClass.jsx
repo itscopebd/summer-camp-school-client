@@ -83,9 +83,9 @@ const ManageClass = () => {
                                     <button className='btn btn-primary btn-sm capitalize'>Pending</button>
                                     {
                                         cource.status === 'approved' || cource.status === 'denied' ? <>  <button disabled className='btn btn-primary btn-sm capitalize mx-1'>Approved</button> <button disabled className='btn btn-primary btn-sm capitalize'>Denied</button>  </> :
-                                            <><button onClick={() => handleApproved(cource._id)} className='btn btn-primary btn-sm capitalize mx-1' >Approved</button> <button onClick={() => handleDenied(cource?._id)} className='btn btn-primary btn-sm capitalize' >Denied</button></>
+                                            <><button onClick={() => handleApproved(cource._id)} className='btn btn-primary btn-sm capitalize mx-1' >Approved</button> <br /><button onClick={() => handleDenied(cource?._id)} className='mt-2 btn btn-primary btn-sm capitalize' >Denied</button></>
                                     }
-                                    <button className='btn btn-primary btn-sm capitalize' onClick={() => window.myModal.showModal()}>FeedBack</button>
+                                    <button className='btn btn-primary mt-2 ml-2 btn-sm capitalize' onClick={() => window.myModal.showModal()}>FeedBack</button>
 
                                 </td>
 

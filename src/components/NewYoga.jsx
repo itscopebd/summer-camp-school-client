@@ -19,19 +19,6 @@ const NewYoga = () => {
                     <p>Ups your heart rate.</p>
                 </div>
             </div>
-
-
-            {/* <div className="card card-side bg-base-100">
-                <figure><img src="https://i.ibb.co/61ndj6s/register-img.png" alt="Movie" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">New movie is released!</h2>
-                    <h3>Register Yoga For Begginer</h3>
-                    <p>Aliquam erat volutpat. Vestibulum imperdiet dolor id ante commodo iaculis. Nam aliquet orci vel elit fermentum iaculis. In bibendum ullamcorper nibh quis facilisis. Curabitur fringilla, neque vulputate sollicitudin laoreet, enim dolor maximus neque, id porttitor diam augue cursus mi. Nunc aliquam leo lorem. Duis gravida sed dui at porta.</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Watch</button>
-                    </div>
-                </div>
-            </div> */}
         </div>
     );
 };

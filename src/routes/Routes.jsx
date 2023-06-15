@@ -5,13 +5,14 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import Dashboard from "../layout/Dashboard";
-import MyCart from "../pages/Dashboard/MyCart";
 import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AddClass from "../pages/Dashboard/Instructors/AddClass";
 import ManageClass from "../pages/Dashboard/Admin/ManageClass";
 import MyClasses from "../pages/Dashboard/Instructors/MyClasses";
-import Instructors from "../pages/Dashboard/Instructors/Instructors";
+import Instructors from "../pages/Instructors/Instructors";
+import MyCart from "../pages/Dashboard/MyCart";
+
 
 
 
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
                 element: <RegisterPage></RegisterPage>
             }, {
                 path: "/instructors",
-                element: <Instructors></Instructors>
+               element:<Instructors></Instructors>
             },
             {
                 path: "/classes",
@@ -64,6 +65,11 @@ export const router = createBrowserRouter([
             {
                 path: "myclasses",
                 element: <MyClasses></MyClasses>
+            },
+            // user 
+            {
+                path:"mycart",
+                element:<MyCart></MyCart>
             }
 
 

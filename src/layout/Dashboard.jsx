@@ -40,9 +40,9 @@ const Dashboard = () => {
                                     <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> Feedback </Link> </li> */}
 
                                 </> : <> <li> <Link to="/dashboard/mycart"> <FaHome /> User Home </Link> </li>
-                                    <li> <Link to="/dashboard/mycart"> <FaCalendarAlt /> Reservations </Link> </li>
+                                    <li> <Link to="/dashboard/mycart"> <FaCalendarAlt /> My Selected Classes</Link> </li>
                                     <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> Payment History </Link> </li>
-                                    <li> <Link to="/dashboard/mycart"> <FaShoppingCart></FaShoppingCart> My Cart </Link> </li>
+                                    <li> <Link to="/dashboard/enrolled"> <FaShoppingCart></FaShoppingCart> My Enrolled Classes </Link> </li>
 
                                 </>
 
