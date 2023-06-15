@@ -14,6 +14,8 @@ const MyCart = () => {
         return res.json()
     });
 
+    const price = selectedclasses.reduce((sum, item) => item.price + sum, 0);
+
     const handleSelectedClassDelete = (id) => {
         const url = `http://localhost:5000/carts/delete/${id}`
         fetch(url, {
@@ -27,7 +29,10 @@ const MyCart = () => {
 
     return (
         <div className='mx-auto w-full'>
-            <h3 className=' text-left text-3xl font-bold ml-5 mb-4 text-[#5ab337d6]'>All Selected Class</h3>
+            <div className='flex justify-between'>
+                <h3 className=' text-left text-3xl font-bold ml-5 mb-4 text-[#5ab337d6]'>All Selected Class</h3>
+                <button className='ml-2 btn bg-[#5ab337d6] btn-sm text-white hover:text-black'>Pay</button>
+            </div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra text-center">
                     {/* head */}
@@ -40,9 +45,10 @@ const MyCart = () => {
                             <th className='font-extrabold text-lg'>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='text-center'>
 
                         {
+
                             selectedclasses.map((selectedclasse, index) => <tr key={selectedclasse._id}>
 
                                 <td className='font-bold'>{index + 1}</td>
@@ -50,7 +56,7 @@ const MyCart = () => {
                                 <td className='font-bold'> Instructor: {selectedclasse?.instructor} </td>
                                 <td className='font-bold'> ${selectedclasse?.price} </td>
                                 <td> <button className='btn bg-[#5ab337d6] btn-sm text-white hover:text-black' onClick={() => handleSelectedClassDelete(selectedclasse._id)}>Delete</button>
-                                    <button className='ml-2 btn bg-[#5ab337d6] btn-sm text-white hover:text-black'>Pay</button> </td>
+                                </td>
 
 
 
@@ -58,8 +64,13 @@ const MyCart = () => {
                             )
 
                         }
+
                     </tbody>
+
                 </table>
+                <div className='text-right w-full'>
+                    <p className='font-bold text-3xl my-5'>Total: ${price}</p>
+                </div>
             </div>
         </div>
     );
