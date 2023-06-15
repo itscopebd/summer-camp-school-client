@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../AuthContext/AuthProvider';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 
 
@@ -31,7 +33,7 @@ const MyCart = () => {
         <div className='mx-auto w-full'>
             <div className='flex justify-between'>
                 <h3 className=' text-left text-3xl font-bold ml-5 mb-4 text-[#5ab337d6]'>All Selected Class</h3>
-                <button className='ml-2 btn bg-[#5ab337d6] btn-sm text-white hover:text-black'>Pay</button>
+                <Link to="/dashboard/payment"><button className='ml-2 btn bg-[#5ab337d6] btn-sm text-white hover:text-black'>Pay</button></Link>
             </div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra text-center">

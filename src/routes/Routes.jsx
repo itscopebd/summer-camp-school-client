@@ -12,6 +12,7 @@ import ManageClass from "../pages/Dashboard/Admin/ManageClass";
 import MyClasses from "../pages/Dashboard/Instructors/MyClasses";
 import Instructors from "../pages/Instructors/Instructors";
 import MyCart from "../pages/Dashboard/MyCart";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 
 
@@ -54,6 +55,11 @@ export const router = createBrowserRouter([
                 element: <AllUsers></AllUsers>
             },
             {
+                path:"payment",
+                element:<Payment></Payment>
+
+            },
+            {
                 path: "manageclass",
                 element: <ManageClass></ManageClass>
             },
@@ -70,7 +76,8 @@ export const router = createBrowserRouter([
             {
                 path:"mycart",
                 element:<MyCart></MyCart>
-            }
+            },
+            
 
 
         ]
