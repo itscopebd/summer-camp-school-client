@@ -8,15 +8,20 @@ import AuthProvider from './AuthContext/AuthProvider'
 import { ToastContainer } from 'react-toastify';
 
 import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
+
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
     <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router}></RouterProvider>
-      </QueryClientProvider>
+      
+        <QueryClientProvider client={queryClient}>
+       
+          <RouterProvider router={router}></RouterProvider>
+         
+        </QueryClientProvider> 
+      
 
       <ToastContainer />
     </AuthProvider>

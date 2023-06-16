@@ -13,6 +13,7 @@ import MyClasses from "../pages/Dashboard/Instructors/MyClasses";
 import Instructors from "../pages/Instructors/Instructors";
 import MyCart from "../pages/Dashboard/MyCart";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import ErrorPage from "../pages/ErrorPage";
 
 
 
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",

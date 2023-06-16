@@ -17,7 +17,7 @@ const ClassesCard = ({ classe, checkUsers }) => {
     const handleAddToCart = () => {
         const selectedClass = { id: _id,classImage:classImage, instructor:userName,userEmail:user?.email, price: price, isSelected: true }
         if (user) {
-            fetch("http://localhost:5000/carts", {
+            fetch("https://server-site-theta.vercel.app/carts", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

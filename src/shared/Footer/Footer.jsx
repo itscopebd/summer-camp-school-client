@@ -3,7 +3,7 @@ import { FaArrowRight, FaFacebook, FaInstagramSquare, FaTwitterSquare } from 're
 
 const Footer = () => {
     return (
-        <div className='bg-gray-300 py-10 md:px-0 px-10'>
+        <div className='bg-[#5ab337d6] py-10 md:px-0 px-10'>
             <div className='container mx-auto'>
                 <div className='grid md:grid-cols-2 lg:grid-cols-4 text-white justify-between'>
                     <div>

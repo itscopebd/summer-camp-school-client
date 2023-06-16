@@ -7,7 +7,7 @@ const NewYoga = () => {
                 <img src="https://i.ibb.co/61ndj6s/register-img.png" alt="" />
             </div>
             <div className='space-y-5'>
-                <h1 className='text-6xl font-medium text-[#5ab337d6]'>New to Yoga?</h1>
+                <h1 className=' text-4xl md:text-6xl font-medium text-[#5ab337d6]'>New to Yoga?</h1>
                 <h2 className='text-4xl'>Register Yoga For Begginer</h2>
                 <p>Aliquam erat volutpat. Vestibulum imperdiet dolor id ante commodo iaculis. Nam aliquet orci vel elit fermentum iaculis. In bibendum ullamcorper nibh quis facilisis. Curabitur fringilla, neque vulputate sollicitudin laoreet, enim dolor maximus neque, id porttitor diam augue cursus mi. Nunc aliquam leo lorem. Duis gravida sed dui at porta.</p>
                 <div className='mt-5 space-y-2'>

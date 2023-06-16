@@ -12,7 +12,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_payment_key);
 const Payment = () => {
     const {user}= useContext(AuthContext )
     const { data: selectedclasses = [], refetch } = useQuery(['selectedclasses'], async () => {
-        const res = await fetch(`http://localhost:5000/carts/${user.email}`)
+        const res = await fetch(`https://server-site-theta.vercel.app/carts/${user.email}`)
         return res.json()
     });
     const total = selectedclasses.reduce((sum, item) => item.price + sum, 0);

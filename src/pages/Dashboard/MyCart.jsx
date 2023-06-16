@@ -11,14 +11,14 @@ const MyCart = () => {
     const { user } = useContext(AuthContext)
 
     const { data: selectedclasses = [], refetch } = useQuery(['selectedclasses'], async () => {
-        const res = await fetch(`http://localhost:5000/carts/${user.email}`)
+        const res = await fetch(`https://server-site-theta.vercel.app/carts/${user.email}`)
         return res.json()
     });
 
     const price = selectedclasses.reduce((sum, item) => item.price + sum, 0);
 
     const handleSelectedClassDelete = (id) => {
-        const url = `http://localhost:5000/carts/delete/${id}`
+        const url = `https://server-site-theta.vercel.app/carts/delete/${id}`
         fetch(url, {
             method: "DELETE"
         }).then(data => {

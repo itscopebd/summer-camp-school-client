@@ -12,7 +12,7 @@ const CheckOutFrom = ({ price }) => {
 
     const [clientSecret, setClientSecret] = useState('')
     useEffect(() => {
-        axios.post("http://localhost:5000/payment", {  price })
+        axios.post("https://server-site-theta.vercel.app/payment", {  price })
             .then(data => {
                 setClientSecret(data.data.clientSecret)
                 console.log(data.data.clientSecret)
