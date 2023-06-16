@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { FaBook, FaBookOpen, FaCalendarAlt, FaHome, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
+import { Link, NavLink, Outlet } from 'react-router-dom';
+import { FaBook, FaBookOpen, FaCalendarAlt, FaHome, FaLaptopCode, FaShoppingCart, FaUser, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import UseAdmin from '../hooks/UseAdmin';
 import UseInstructor from '../hooks/useInstructor';
 
@@ -23,26 +23,25 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                    <ul className="menu p-4 w-80 h-full bg-[#5ab337d6] text-base-content">
                         {
-                            isAdmin?.admin ? <> <li> <Link to="/dashboard/mycart"> <FaHome /> Admin Home </Link> </li>
-                                <li> <Link to="/dashboard/mycart"> <FaUtensils /> Add Items </Link> </li>
-                                <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> Manage Items </Link> </li>
-                                <li> <Link to="/dashboard/manageclass"> <FaWallet></FaWallet> Manage Class </Link> </li>
-                                <li> <Link to="/dashboard/mycart"> <FaBook /> Manage Bookings </Link> </li>
-                                <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> All Users </Link> </li>
+                            isAdmin?.admin ? <> <li> <NavLink  className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard"> <FaHome /> Admin Home </NavLink> </li>
+                            
+                                <li>  <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard/manageclass"> <FaLaptopCode></FaLaptopCode> Manage Class  </NavLink> </li>
+                                
+                                <li> <NavLink  className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"}  to="/dashboard/allusers"> <FaUsers></FaUsers> All Users </NavLink> </li>
 
                             </> : isInstructor?.instructor ?
-                                <> <li> <Link to="/dashboard/istructor"> <FaHome /> Instructors Home </Link> </li>
-                                    <li> <Link to="/dashboard/addclass"> <FaUtensils /> Add a Class </Link> </li>
-                                    <li> <Link to="/dashboard/myclasses"> <FaWallet></FaWallet> My Classes </Link> </li>
+                                <> <li> <NavLink  className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard/istructor"> <FaHome /> Instructors Home </NavLink> </li>
+                                    <li> <NavLink  className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard/addclass"> <FaUtensils /> Add a Class </NavLink> </li>
+                                    <li> <NavLink  className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard/myclasses"> <FaUser/> My Classes </NavLink> </li>
                                     {/* <li> <Link to="/dashboard/mycart"> <FaBook /> Total Enrolled Students </Link> </li>
                                     <li> <Link to="/dashboard/allusers"> <FaUsers></FaUsers> Feedback </Link> </li> */}
 
-                                </> : <> <li> <Link to="/dashboard/mycart"> <FaHome /> User Home </Link> </li>
-                                    <li> <Link to="/dashboard/mycart"> <FaCalendarAlt /> My Selected Classes</Link> </li>
-                                    <li> <Link to="/dashboard/mycart"> <FaWallet></FaWallet> Payment History </Link> </li>
-                                    <li> <Link to="/dashboard/enrolled"> <FaShoppingCart></FaShoppingCart> My Enrolled Classes </Link> </li>
+                                </> : <> <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard"> <FaHome /> User Home </NavLink> </li>
+                                    <li> <NavLink className={({ isActive }) => isActive ? "text-white transition hover:bg-transparent text-lg font-semibold" : "text-lg font-semibold hover:text-white transition hover:bg-transparent"} to="/dashboard/mycart"> <FaCalendarAlt /> My Selected Classes</NavLink> </li>
+                                    <li> <Link to="/dashboard"> <FaWallet></FaWallet> Payment History </Link> </li>
+                                    <li> <Link to="/dashboard"> <FaShoppingCart></FaShoppingCart> My Enrolled Classes </Link> </li>
 
                                 </>
 

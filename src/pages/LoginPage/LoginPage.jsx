@@ -9,8 +9,8 @@ import { toast } from 'react-toastify';
 const LoginPage = () => {
     // const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
-    const { singIn, userLogin,user } = useContext(AuthContext);
-console.log(user)
+    const { singIn, userLogin, user } = useContext(AuthContext);
+
     const navigate = useNavigate();
     const location = useLocation()
     const redirectFrom = location.state?.from?.pathname || "/";
@@ -28,8 +28,8 @@ console.log(user)
                     progress: undefined,
                     theme: "light",
                 });
-
-                const savedUser = { userName: data.user.displayName, userEmail: data.user.email }
+                console.log(data)
+                const savedUser = { userName: data.user.displayName, userEmail: data.user.email,userImage:data.user.photoURL }
                 fetch("https://server-site-theta.vercel.app/users", {
                     method: "POST",
                     headers: {
@@ -39,9 +39,9 @@ console.log(user)
                 })
                     .then(res => res.json())
                     .then(data => {
-                       
+
                     })
-                    navigate(redirectFrom, { replace: true })
+                navigate(redirectFrom, { replace: true })
             })
     }
 
@@ -62,7 +62,7 @@ console.log(user)
                     theme: "light",
                 });
 
-              navigate(redirectFrom,{ replace:true });
+                navigate(redirectFrom, { replace: true });
 
             }).catch(error => {
                 toast("Email or password don't match!!");

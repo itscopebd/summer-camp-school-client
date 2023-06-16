@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const ClassesCard = ({ classe, checkUsers }) => {
 
     const { user } = useContext(AuthContext);
-    console.log(classe)
+ 
 
     const { _id, classImage, className, availableSeats, price, userName } = classe;
 
@@ -16,6 +16,7 @@ const ClassesCard = ({ classe, checkUsers }) => {
 
     const handleAddToCart = () => {
         const selectedClass = { id: _id,classImage:classImage, instructor:userName,userEmail:user?.email, price: price, isSelected: true }
+        console.log(selectedClass)
         if (user) {
             fetch("https://server-site-theta.vercel.app/carts", {
                 method: "POST",
