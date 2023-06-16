@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../AuthContext/AuthProvider';
-import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 
