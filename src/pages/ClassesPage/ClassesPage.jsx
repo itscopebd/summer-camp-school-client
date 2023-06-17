@@ -22,7 +22,7 @@ const {user}= useContext(AuthContext)
 
     }, [])
 
-    
+    console.log(checkUsers)
 
     return (
         <div className='container mx-auto my-10'>

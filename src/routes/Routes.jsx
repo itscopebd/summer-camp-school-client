@@ -14,6 +14,8 @@ import Instructors from "../pages/Instructors/Instructors";
 import MyCart from "../pages/Dashboard/MyCart";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import ErrorPage from "../pages/ErrorPage";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 
 
@@ -54,7 +56,7 @@ export const router = createBrowserRouter([
             
             {
                 path: "allusers",
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path:"payment",
@@ -63,16 +65,16 @@ export const router = createBrowserRouter([
             },
             {
                 path: "manageclass",
-                element: <ManageClass></ManageClass>
+                element: <AdminRoute><ManageClass></ManageClass></AdminRoute>
             },
             
             {
                 path: "addclass",
-                element: <AddClass></AddClass>
+                element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
             },
             {
                 path: "myclasses",
-                element: <MyClasses></MyClasses>
+                element: <InstructorRoute><MyClasses></MyClasses></InstructorRoute>
             },
             // user 
             {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaBook, FaBookOpen, FaCalendarAlt, FaHome, FaLaptopCode, FaShoppingCart, FaUser, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
-import UseAdmin from '../hooks/UseAdmin';
+// import UseAdmin from '../hooks/UseAdmin';
 import UseInstructor from '../hooks/useInstructor';
+import UseAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
     
