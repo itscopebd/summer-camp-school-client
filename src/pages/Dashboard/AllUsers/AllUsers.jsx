@@ -4,14 +4,14 @@ import { FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 const AllUsers = () => {
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch("http://localhost:5000/users")
+        const res = await fetch("https://server-site-theta.vercel.app/users")
         return res.json()
     })
 
 // delete user 
 
     const handleDeleteUser = (id) => {
-        fetch(`http://localhost:5000/users/delete/${id}`, {
+        fetch(`https://server-site-theta.vercel.app/users/delete/${id}`, {
             method: "DELETE"
         })
         .then(data => {
@@ -25,7 +25,7 @@ const AllUsers = () => {
 // make admin 
 
     const handleAdmin = (id) => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://server-site-theta.vercel.app/users/admin/${id}`, {
             method: "PATCH"
         })
         .then(data => {
@@ -40,7 +40,7 @@ const AllUsers = () => {
 
     const handleInstructor = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/users/instructor/${id}`, {
+        fetch(`https://server-site-theta.vercel.app/users/instructor/${id}`, {
             method: "PATCH"
         })
         .then(data => {

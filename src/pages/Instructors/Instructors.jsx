@@ -5,7 +5,7 @@ import InstructorCard from '../../components/InstructorCard';
 const Instructors = () => {
     const [instructors, setInstructor] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/users/instructors")
+        fetch("https://server-site-theta.vercel.app/users/instructors")
             .then(res => res.json())
             .then(data => {
                 setInstructor(data);
@@ -15,7 +15,7 @@ const Instructors = () => {
             })
     }, []);
     // const { data: instructor = [], refetch } = useQuery('instructors', async () => {
-    //     const res = await fetch(`http://localhost:5000/users/instructors`)
+    //     const res = await fetch(`https://server-site-theta.vercel.app/users/instructors`)
     //     return res.json()
     // })
 

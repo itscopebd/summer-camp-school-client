@@ -3,7 +3,7 @@ import React from 'react';
 
 const ManageClass = () => {
     const { data: cources = [], refetch } = useQuery(['cources'], async () => {
-        const res = await fetch("http://localhost:5000/cource")
+        const res = await fetch("https://server-site-theta.vercel.app/cource")
         return res.json()
     })
 
@@ -14,7 +14,7 @@ const ManageClass = () => {
 
     const handleApproved = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/cource/approve/${id}`, {
+        fetch(`https://server-site-theta.vercel.app/cource/approve/${id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
@@ -28,7 +28,7 @@ const ManageClass = () => {
 
     const handleDenied = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/cource/denied/${id}`, {
+        fetch(`https://server-site-theta.vercel.app/cource/denied/${id}`, {
             method: "PATCH"
         })
             .then(res => res.json())

@@ -10,9 +10,14 @@ const CheckOutFrom = ({ price }) => {
     const elements = useElements();
     const [cartError, setCardError] = useState('');
 
-    const [clientSecret, setClientSecret] = useState('')
+const [transactionSuccess,setTransactionSuccess]=useState('')
+
+
+
+    const [clientSecret, setClientSecret] = useState('');
+
     useEffect(() => {
-        axios.post("http://localhost:5000/payment", {  price })
+        axios.post("https://server-site-theta.vercel.app/payment", { price })
             .then(data => {
                 setClientSecret(data.data.clientSecret)
                 console.log(data.data.clientSecret)
@@ -20,7 +25,7 @@ const CheckOutFrom = ({ price }) => {
 
     }, [])
 
-    const handleSubmit = async event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (!stripe || !elements) {
             return;
@@ -30,7 +35,7 @@ const CheckOutFrom = ({ price }) => {
             return;
         }
 
-        // Use your card Element with other Stripe.js APIs
+
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
@@ -50,16 +55,19 @@ const CheckOutFrom = ({ price }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        email: user?.useEmail || 'Unknown',
-                        name: user?.userName || "Anonymous"
+                        email: user?.email || 'Unknown',
+                        name: user?.displayName || "Anonymous"
                     },
                 },
             },
         );
         if (confirmError) {
             console.log(confirmError)
-        } else {
-            console.log(paymentIntent)
+        }
+
+        if (paymentIntent.status === "succeeded") {
+            const transactionId = paymentIntent.id;
+            setTransactionSuccess(transactionId)
         }
 
 
@@ -90,7 +98,10 @@ const CheckOutFrom = ({ price }) => {
                     Pay
                 </button>
             </form>
+            <div className='ml-3'>
             {cartError && <p className='text-red-500 ml-5 mt-3'>{cartError}</p>}
+            {transactionSuccess && <p className='text-green-500'> Trasansaction Complete Your Transaction Id:  {transactionSuccess}  </p>}
+            </div>
         </>
 
 
