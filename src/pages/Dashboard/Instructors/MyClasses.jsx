@@ -24,7 +24,7 @@ const MyClasses = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        <tr>Roiq</tr>
+                     
 
 
                     </tbody>

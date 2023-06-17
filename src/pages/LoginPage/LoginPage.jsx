@@ -30,7 +30,7 @@ const LoginPage = () => {
                 });
                 console.log(data)
                 const savedUser = { userName: data.user.displayName, userEmail: data.user.email,userImage:data.user.photoURL }
-                fetch("https://server-site-theta.vercel.app/users", {
+                fetch("http://localhost:5000/users", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"

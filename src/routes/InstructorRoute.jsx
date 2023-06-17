@@ -3,7 +3,7 @@ import { AuthContext } from '../AuthContext/AuthProvider';
 import UseInstructor from '../hooks/useInstructor';
 import { Navigate, useLocation } from 'react-router-dom';
 
-const InstructorRoute = () => {
+const InstructorRoute = ({children}) => {
     const { user, loading } = useContext(AuthContext);
     const [isInstructor, isInstructorLoading] = UseInstructor();
     const location = useLocation();

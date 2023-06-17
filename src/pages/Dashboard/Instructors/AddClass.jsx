@@ -28,7 +28,7 @@ const AddClass = () => {
                 
                 const {className,userEmail,userName,price,availableSeats}=data;
                 const newItems={className,userEmail,userName,availableSeats,price:parseFloat(price),classImage:imgUrl,status:"Pending"}
-                fetch("https://server-site-theta.vercel.app/cource",{
+                fetch("http://localhost:5000/cource",{
                     method:"POST",
                     headers:{
                         "content-type":"application/json"
