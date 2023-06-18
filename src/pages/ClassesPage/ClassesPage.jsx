@@ -8,7 +8,7 @@ import { AuthContext } from '../../AuthContext/AuthProvider';
 
 const ClassesPage = () => {
     const { data: classes = [], refetch } = useQuery(['classes'], async () => {
-        const res = await fetch("https://server-site-theta.vercel.app/cource/client")
+        const res = await fetch("http://localhost:5000/cource/client")
         return res.json()
     })
     
@@ -16,7 +16,7 @@ const {user}= useContext(AuthContext)
    
     const [checkUsers, setCheckUsers] = useState({})
     useEffect(() => {
-        fetch(`https://server-site-theta.vercel.app/users/roleCheck/${user?.email}`)
+        fetch(`http://localhost:5000/users/roleCheck/${user?.email}`)
             .then(res => res.json())
             .then(data => setCheckUsers(data))
 
@@ -26,7 +26,7 @@ const {user}= useContext(AuthContext)
 
     return (
         <div className='container mx-auto my-10'>
-            <div className='grid gap-10 grid-cols-3'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-10'>
                 {
                     classes.map(classe => <ClassesCard checkUsers={checkUsers} classe={classe} key={classe._id}></ClassesCard>)
                 }

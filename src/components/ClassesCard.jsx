@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const ClassesCard = ({ classe, checkUsers }) => {
 
     const { user } = useContext(AuthContext);
- 
+
 
     const { _id, classImage, className, availableSeats, price, userName } = classe;
 
@@ -15,10 +15,15 @@ const ClassesCard = ({ classe, checkUsers }) => {
     const [isSelected, setIsSelected] = useState(false)
 
     const handleAddToCart = () => {
-        const selectedClass = { id: _id,classImage:classImage, instructor:userName,userEmail:user?.email, price: price, isSelected: true }
+        const userEmail = user?.email;
+        const id = _id;
+        console.log(id, userEmail)
+        const selectedClass = { id, classImage: classImage, instructor: userName, userEmail, price: price, isSelected: true }
         console.log(selectedClass)
         if (user) {
-            fetch("https://server-site-theta.vercel.app/carts", {
+            // http://localhost:5000/carts/${userEmail}/${id}
+
+            fetch(`http://localhost:5000/carts`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -27,7 +32,7 @@ const ClassesCard = ({ classe, checkUsers }) => {
 
             }).then(res => res.json())
                 .then(data => {
-
+                    console.log(data)
                     if (data.message) {
                         toast.info(`${data.message}`);
                         setIsSelected(true)

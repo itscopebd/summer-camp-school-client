@@ -63,7 +63,7 @@ const RegisterPage = () => {
 
 
                             const savedUser = { userImage:imgUrl,userName: data.name, userEmail: data.email }
-                            fetch("https://server-site-theta.vercel.app/users", {
+                            fetch("http://localhost:5000/users", {
                                 method: "POST",
                                 headers: {
                                     "content-type": "application/json"

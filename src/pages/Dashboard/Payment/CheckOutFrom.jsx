@@ -17,7 +17,7 @@ const [transactionSuccess,setTransactionSuccess]=useState('')
     const [clientSecret, setClientSecret] = useState('');
 
     useEffect(() => {
-        axios.post("https://server-site-theta.vercel.app/payment", { price })
+        axios.post("http://localhost:5000/payment", { price })
             .then(data => {
                 setClientSecret(data.data.clientSecret)
                 console.log(data.data.clientSecret)

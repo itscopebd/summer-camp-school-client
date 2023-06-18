@@ -4,7 +4,7 @@ const OurPricing = () => {
     return (
         <>
         <h3 className='text-5xl font-bold text-center mt-20'>Our <span className='text-[#5ab337d6]'>Pricing</span></h3>
-            <div className='grid grid-cols-1 gap-16 md:grid-cols-3 my-10'>
+            <div className='grid md:grid-cols-2 gap-16 lg:grid-cols-3 my-10'>
 
                 <div className="card bg-base-100 shadow-xl text-center">
                     <div className="card-body p-0 pb-5">
